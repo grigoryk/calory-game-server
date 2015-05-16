@@ -30,6 +30,9 @@ class Dish(models.Model):
     nutritional_data = models.ForeignKey(
         NutritionalData, blank=True, null=True)
 
+    class Meta:
+        verbose_name_plural = "Dishes"
+
 
 class Guess(models.Model):
     user = models.ForeignKey(User)
@@ -37,3 +40,6 @@ class Guess(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     nutritional_data = models.ForeignKey(NutritionalData)
+
+    class Meta:
+        verbose_name_plural = "Guesses"
