@@ -21,7 +21,7 @@ class NutritionalData(models.Model):
 class Dish(models.Model):
     author = models.ForeignKey(User)
     description = models.TextField()
-    photos = models.ManyToManyField(Image)
+    images = models.ManyToManyField(Image)
     is_vegetarian = models.BooleanField()
 
     created_at = models.DateTimeField(auto_now_add=True)
