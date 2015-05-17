@@ -4,13 +4,20 @@ from .models import (
     Image, NutritionalDataDish, NutritionalDataGuess, Dish, Guess)
 
 
+class ImageInline(admin.StackedInline):
+    model = Image
+
+
 class NutritionalDataDishInline(admin.StackedInline):
     model = NutritionalDataDish
 
 
 class DishAdmin(admin.ModelAdmin):
     list_display = ('description', 'is_vegetarian', 'created_at')
-    inlines = [NutritionalDataDishInline]
+    inlines = [
+        ImageInline,
+        NutritionalDataDishInline
+    ]
 
 
 class NutritionalDataGuessInline(admin.StackedInline):

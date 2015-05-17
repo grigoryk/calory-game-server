@@ -3,16 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Image(models.Model):
-    image = models.ImageField(upload_to="dish_images")
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
 class Dish(models.Model):
     author = models.ForeignKey(User)
     description = models.TextField()
-    images = models.ManyToManyField(Image)
     is_vegetarian = models.BooleanField()
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,6 +13,13 @@ class Dish(models.Model):
 
     class Meta:
         verbose_name_plural = "Dishes"
+
+
+class Image(models.Model):
+    dish = models.ForeignKey(Dish, related_name="images")
+    image = models.ImageField(upload_to="dish_images")
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Guess(models.Model):
