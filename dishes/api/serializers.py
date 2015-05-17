@@ -1,12 +1,18 @@
 from rest_framework import serializers
-from ..models import Dish, Guess, Image, NutritionalData
+from ..models import (
+    Dish, Guess, Image, NutritionalDataDish, NutritionalDataGuess)
 
 
-class NutritionalData(serializers.ModelSerializer):
+class NutritionalDataDishSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NutritionalData
+        model = NutritionalDataDish
         fields = (
             'calories', 'fat', 'carbohydrates', 'protein', 'last_modified')
+
+
+class NutritionalDataGuessSerializer(NutritionalDataDishSerializer):
+    class Meta:
+        model = NutritionalDataGuess
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -17,7 +23,8 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class DishSerializer(serializers.HyperlinkedModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
-    nutritional_data = NutritionalData(many=False, read_only=True)
+    nutritional_data = NutritionalDataDishSerializer(
+        many=False, read_only=True)
 
     class Meta:
         model = Dish
@@ -28,7 +35,8 @@ class DishSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GuessSerializer(serializers.HyperlinkedIdentityField):
-    nutritional_data = NutritionalData(many=False, read_only=True)
+    nutritional_data = NutritionalDataGuessSerializer(
+        many=False, read_only=True)
 
     class Meta:
         model = Guess
