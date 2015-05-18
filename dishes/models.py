@@ -37,6 +37,11 @@ class NutritionalData(models.Model):
     carbohydrates = models.IntegerField(blank=True, null=True)
     protein = models.IntegerField(blank=True, null=True)
 
+    cholesterol = models.IntegerField(blank=True, null=True)
+    fibre = models.IntegerField(blank=True, null=True)
+    sugar = models.IntegerField(blank=True, null=True)
+    sodium = models.IntegerField(blank=True, null=True)
+
     last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
